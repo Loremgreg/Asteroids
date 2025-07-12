@@ -29,10 +29,13 @@ def main():
         # Efface l'écran en le remplissant de noir à chaque nouvelle frame
         screen.fill("black") 
 
-        # appelle la méthode draw pour que le vaisseau (player) soit rafraîchi constamment sur l'écran
+        # Met à jour la position/rotation du vaisseau
+        player.update(dt).   
+
+        # Dessine le vaisseau a sa nouvelle position (appelle la méthode draw pour que le vaisseau (player) soit rafraîchi constamment sur l'écran)
         player.draw(screen)
 
-        # Rafraîchir l'écran pour afficher tout ce qui a été dessiné
+        # Affiche tout a l'ecran (Rafraîchir l'écran pour afficher tout ce qui a été dessiné)
         pygame.display.flip()
 
 # Point d'entrée du programme

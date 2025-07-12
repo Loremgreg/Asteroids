@@ -1,7 +1,8 @@
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS
+from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED
 import pygame 
 
+# La class Player est le plan pour créer un vaisseaux spatial. Elle décrit ce qu'un vaisseau est et ce qu'il peut faire.
 class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
@@ -18,3 +19,16 @@ class Player(CircleShape):
     
     def draw(self, screen):
         pygame.draw.polygon(screen, [255, 255, 255], self.triangle(), width=2)
+
+    def rotate(self, dt):
+        self.rotation += PLAYER_TURN_SPEED * dt
+
+    def update(self, dt):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            self.rotate(-dt)            # dt négatif = rotation à gauche
+        if keys[pygame.K_d]:
+            self.rotate(dt)
+
+        
