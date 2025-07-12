@@ -7,6 +7,9 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
    
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
+
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))         # to get a new GUI window
     
     # --- Initialisation pour la gestion du temps et du FPS (Frames Per Second) ---    dt = 0
