@@ -30,7 +30,7 @@ def main():
         screen.fill("black") 
 
         # Met à jour la position/rotation du vaisseau
-        player.update(dt).   
+        player.update(dt)   
 
         # Dessine le vaisseau a sa nouvelle position (appelle la méthode draw pour que le vaisseau (player) soit rafraîchi constamment sur l'écran)
         player.draw(screen)
