@@ -1,5 +1,6 @@
 import pygame
 from constants import * 
+from player import Player
 
 def main():
     pygame.init()           # Initialise tous les modules de Pygame nécessaires.
@@ -7,11 +8,13 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
    
-    x = SCREEN_WIDTH / 2
-    y = SCREEN_HEIGHT / 2
-
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))         # to get a new GUI window
     
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
+    player = Player(x, y)              # fabriques un vaisseau spatial en creant une instance (objet) de Player
+
+
     # --- Initialisation pour la gestion du temps et du FPS (Frames Per Second) ---    dt = 0
     Clock = pygame.time.Clock()  # Crée un objet Clock pour aider à gérer le temps et le framerate du jeu
 
@@ -25,6 +28,9 @@ def main():
 
         # Efface l'écran en le remplissant de noir à chaque nouvelle frame
         screen.fill("black") 
+
+        # appelle la méthode draw pour que le vaisseau (player) soit rafraîchi constamment sur l'écran
+        player.draw(screen)
 
         # Rafraîchir l'écran pour afficher tout ce qui a été dessiné
         pygame.display.flip()
