@@ -10,6 +10,10 @@ def main():
    
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))         # to get a new GUI window
     
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
     player = Player(x, y)              # fabriques un vaisseau spatial en creant une instance (objet) de Player
@@ -17,6 +21,8 @@ def main():
 
     # --- Initialisation pour la gestion du temps et du FPS (Frames Per Second) ---    dt = 0
     Clock = pygame.time.Clock()  # Crée un objet Clock pour aider à gérer le temps et le framerate du jeu
+
+  
 
     # Gestion des événements (pour pouvoir fermer la fenêtre)
     while True:              
@@ -30,10 +36,11 @@ def main():
         screen.fill("black") 
 
         # Met à jour la position/rotation du vaisseau
-        player.update(dt)   
+        updatable.update(dt)   
 
         # Dessine le vaisseau a sa nouvelle position (appelle la méthode draw pour que le vaisseau (player) soit rafraîchi constamment sur l'écran)
-        player.draw(screen)
+        for sprite in drawable:
+            sprite.draw(screen)
 
         # Affiche tout a l'ecran (Rafraîchir l'écran pour afficher tout ce qui a été dessiné)
         pygame.display.flip()
