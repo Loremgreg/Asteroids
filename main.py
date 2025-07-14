@@ -1,3 +1,4 @@
+import sys
 import pygame
 from constants import * 
 from player import Player
@@ -37,21 +38,27 @@ def main():
         for event in pygame.event.get():  # Pour chaque événement dans la liste des événements
             if event.type == pygame.QUIT:  # Si ce type d'événement est "fermeture de fenêtre"
                 return                  # Alors on sort de la fonction
-        dt = (Clock.tick(60) / 1000)    # --- Calcul du Delta Time et régulation du Framerate --- Clock.tick(60) : Limite le jeu à un maximum de 60 images par seconde (FPS). / 1000       : Convertit le temps (en millisecondes) en secondes pour faciliter les calculs de mouvement
    
+        # Met à jour la position/rotation du vaisseau
+        updatable.update(dt)
+
+        for asteroid in asteroids:
+            if asteroid.collides_with(player):
+                print("Game over!")
+                sys.exit()
+
 
         # Efface l'écran en le remplissant de noir à chaque nouvelle frame
         screen.fill("black") 
 
-        # Met à jour la position/rotation du vaisseau
-        updatable.update(dt)   
-
         # Dessine le vaisseau a sa nouvelle position (appelle la méthode draw pour que le vaisseau (player) soit rafraîchi constamment sur l'écran)
-        for sprite in drawable:
-            sprite.draw(screen)
+        for obj in drawable:
+            obj.draw(screen)
 
         # Affiche tout a l'ecran (Rafraîchir l'écran pour afficher tout ce qui a été dessiné)
         pygame.display.flip()
+
+        dt = (Clock.tick(60) / 1000)    # --- Calcul du Delta Time et régulation du Framerate --- Clock.tick(60) : Limite le jeu à un maximum de 60 images par seconde (FPS). / 1000       : Convertit le temps (en millisecondes) en secondes pour faciliter les calculs de mouvement
 
 # Point d'entrée du programme
 if __name__ == "__main__":      # Cette condition assure que main() est appelée seulement si le script est exécuté directement
