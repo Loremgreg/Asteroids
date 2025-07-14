@@ -30,8 +30,8 @@ def main():
 
     # --- Initialisation pour la gestion du temps et du FPS (Frames Per Second) ---    dt = 0
     Clock = pygame.time.Clock()  # Crée un objet Clock pour aider à gérer le temps et le framerate du jeu
+    dt = 0                      # Initialize dt before the game loop
 
-  
 
     # Gestion des événements (pour pouvoir fermer la fenêtre)
     while True:              
