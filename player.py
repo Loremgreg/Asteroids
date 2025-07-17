@@ -1,6 +1,8 @@
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
+from constants import *
 import pygame 
+from shot import Shot
+
 
 # La class Player est le plan pour créer un vaisseaux spatial. Elle décrit ce qu'un vaisseau est et ce qu'il peut faire.
 class Player(CircleShape):
@@ -38,5 +40,10 @@ class Player(CircleShape):
             self.move(dt)            
         if keys[pygame.K_s]:
             self.move(-dt)
+        if keys[pygame.K_SPACE]:
+            self.shoot()
 
-   
+    def shoot(self):
+        shot = Shot(self.position.x, self.position.y)
+        shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
+
